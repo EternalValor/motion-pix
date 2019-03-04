@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import ScreenPlay from './pages/ScreenPlay';
 import Construction from './components/Construction';
 import ScrollToTop from './components/ScrollToTop';
 import { connect } from 'react-redux';
 import { fetchTvGenres, fetchMovieGenres } from './actions/apiActions';
+import { setBackdropSize } from './actions/displayActions';
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchTvGenres();
     this.props.fetchMovieGenres();
+    this.props.setBackdropSize(window.innerWidth);
     console.log('[APP HAS LOADED]');
   }
 
@@ -22,7 +25,10 @@ class App extends Component {
           <Layout>
             <Switch>
               <Route path="/tv-show/:id" component={Construction} />
-              <Route path="/movie/:id" component={Construction} />
+              <Route
+                path="/movie/:id"
+                render={props => <ScreenPlay {...props} type="movie" />}
+              />
               <Route
                 path="/discover"
                 render={props => <div>Discover Page</div>}
@@ -37,10 +43,12 @@ class App extends Component {
 }
 
 App.propTypes = {
-  fetchTvGenres: PropTypes.func.isRequired
+  fetchTvGenres: PropTypes.func.isRequired,
+  fetchMovieGenres: PropTypes.func.isRequired,
+  setBackdropSize: PropTypes.func.isRequired
 };
 
 export default connect(
   state => ({}),
-  { fetchTvGenres, fetchMovieGenres }
+  { fetchTvGenres, fetchMovieGenres, setBackdropSize }
 )(App);

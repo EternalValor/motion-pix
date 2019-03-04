@@ -12,6 +12,7 @@ class HeroCarousel extends React.Component {
   render() {
     console.log(this.props);
     let settings = {
+      lazyLoad: true,
       dots: true,
       infinite: true,
       speed: 500,

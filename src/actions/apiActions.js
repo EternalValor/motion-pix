@@ -3,12 +3,14 @@ import {
   FETCH_POPULAR_MOVIES,
   FETCH_TV_GENRES,
   FETCH_MOVIE_GENRES,
-  FETCH_FEATURED_LISTS
+  FETCH_FEATURED_LISTS,
+  FETCH_MOVIE_DETAILS,
+  FETCH_MOVIE_CAST
 } from './types';
-import { apiStem, apiKey } from '../api_info';
+import { api_base_url, apiKey } from '../api_info';
 
 export const fetchPopularTV = () => dispatch => {
-  fetch(`${apiStem}/tv/popular?api_key=${apiKey}`)
+  fetch(`${api_base_url}/tv/popular?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       dispatch({
@@ -19,7 +21,7 @@ export const fetchPopularTV = () => dispatch => {
 };
 
 export const fetchPopularMovies = () => dispatch => {
-  fetch(`${apiStem}/movie/popular?api_key=${apiKey}`)
+  fetch(`${api_base_url}/movie/popular?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       dispatch({
@@ -30,7 +32,7 @@ export const fetchPopularMovies = () => dispatch => {
 };
 
 export const fetchTvGenres = () => dispatch => {
-  fetch(`${apiStem}/genre/tv/list?api_key=${apiKey}`)
+  fetch(`${api_base_url}/genre/tv/list?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       let genres = {};
@@ -45,7 +47,7 @@ export const fetchTvGenres = () => dispatch => {
 };
 
 export const fetchMovieGenres = () => dispatch => {
-  fetch(`${apiStem}/genre/movie/list?api_key=${apiKey}`)
+  fetch(`${api_base_url}/genre/movie/list?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       let genres = {};
@@ -60,14 +62,14 @@ export const fetchMovieGenres = () => dispatch => {
 };
 
 export const fetchFeaturedLists = movie_id => dispatch => {
-  fetch(`${apiStem}/movie/${movie_id}/lists?api_key=${apiKey}`)
+  fetch(`${api_base_url}/movie/${movie_id}/lists?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data => {
       data.results.filter(list => list.item_count >= 3);
       Promise.all([
-        fetch(`${apiStem}/list/${data.results[0].id}?api_key=${apiKey}`),
-        fetch(`${apiStem}/list/${data.results[1].id}?api_key=${apiKey}`),
-        fetch(`${apiStem}/list/${data.results[2].id}?api_key=${apiKey}`)
+        fetch(`${api_base_url}/list/${data.results[0].id}?api_key=${apiKey}`),
+        fetch(`${api_base_url}/list/${data.results[1].id}?api_key=${apiKey}`),
+        fetch(`${api_base_url}/list/${data.results[2].id}?api_key=${apiKey}`)
       ]).then(([list1, list2, list3]) => {
         Promise.all([list1.json(), list2.json(), list3.json()]).then(res =>
           dispatch({
@@ -77,4 +79,26 @@ export const fetchFeaturedLists = movie_id => dispatch => {
         );
       });
     });
+};
+
+export const fetchMovieDetails = movie_id => dispatch => {
+  fetch(`${api_base_url}/movie/${movie_id}?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data =>
+      dispatch({
+        type: FETCH_MOVIE_DETAILS,
+        payload: data
+      })
+    );
+};
+
+export const fetchMovieCast = movie_id => dispatch => {
+  fetch(`${api_base_url}/movie/${movie_id}/credits?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data =>
+      dispatch({
+        type: FETCH_MOVIE_CAST,
+        payload: data.cast
+      })
+    );
 };

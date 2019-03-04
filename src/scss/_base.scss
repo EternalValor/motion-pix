@@ -2,6 +2,9 @@
 
 :root {
   --black-1: #212121;
+  --grey-1: #575757;
+  --grey-2: #777777;
+  --grey-3: #aeaeae;
   --box-shadow-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -70,4 +73,26 @@ body {
 .link:visited {
   text-decoration: none;
   color: inherit;
+}
+
+.play-button {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  -webkit-clip-path: polygon(0 0, 0% 100%, 100% 50%);
+  clip-path: polygon(0 0, 0% 100%, 100% 50%);
+  background: #ffffff;
+
+  &--black {
+    background: var(--black-1);
+  }
+}
+
+.slick-next,
+.slick-prev {
+  width: auto;
+  height: auto;
+  &::before {
+    content: '';
+  }
 }

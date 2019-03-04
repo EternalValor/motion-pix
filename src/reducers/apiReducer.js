@@ -3,7 +3,9 @@ import {
   FETCH_POPULAR_MOVIES,
   FETCH_TV_GENRES,
   FETCH_MOVIE_GENRES,
-  FETCH_FEATURED_LISTS
+  FETCH_FEATURED_LISTS,
+  FETCH_MOVIE_DETAILS,
+  FETCH_MOVIE_CAST
 } from '../actions/types';
 
 const initialState = {
@@ -11,7 +13,9 @@ const initialState = {
   popularMovies: [],
   genresTV: {},
   genresMovies: {},
-  featuredLists: []
+  featuredLists: [],
+  movieDetails: {},
+  movieCast: []
 };
 
 export default function(state = initialState, action) {
@@ -40,6 +44,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         featuredLists: action.payload
+      };
+    case FETCH_MOVIE_DETAILS:
+      return {
+        ...state,
+        movieDetails: action.payload
+      };
+    case FETCH_MOVIE_CAST:
+      return {
+        ...state,
+        movieCast: action.payload
       };
     default:
       return state;
