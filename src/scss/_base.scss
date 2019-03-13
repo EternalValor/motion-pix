@@ -4,7 +4,7 @@
   --black-1: #212121;
   --grey-1: #575757;
   --grey-2: #777777;
-  --grey-3: #aeaeae;
+  --grey-3: #9e9e9e;
   --box-shadow-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -22,6 +22,7 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  color: var(--black-1);
 
   @include respond(tab-land) {
     // width < 1200?
@@ -94,5 +95,30 @@ body {
   height: auto;
   &::before {
     content: '';
+  }
+}
+
+@keyframes loading-div {
+  0% {
+    left: 0%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.fake-div {
+  position: relative;
+  &::after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 40%;
+    height: 150%;
+    top: -50%;
+    left: 0;
+    background: radial-gradient(rgba(255, 255, 255, 0.75), transparent);
+    animation: loading-div 0.75s infinite;
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
   }
 }

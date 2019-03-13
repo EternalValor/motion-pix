@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import ScreenPlay from './pages/ScreenPlay';
+import Discover from './pages/Discover';
 import Construction from './components/Construction';
 import ScrollToTop from './components/ScrollToTop';
 import { connect } from 'react-redux';
@@ -31,7 +32,7 @@ class App extends Component {
               />
               <Route
                 path="/discover"
-                render={props => <div>Discover Page</div>}
+                component={Discover}
               />
               <Route path="/" exact component={Home} />
             </Switch>

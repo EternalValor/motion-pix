@@ -5,7 +5,8 @@ import {
   FETCH_MOVIE_GENRES,
   FETCH_FEATURED_LISTS,
   FETCH_MOVIE_DETAILS,
-  FETCH_MOVIE_CAST
+  FETCH_MOVIE_CAST,
+  FETCH_DISCOVER
 } from './types';
 import { api_base_url, apiKey } from '../api_info';
 
@@ -101,4 +102,12 @@ export const fetchMovieCast = movie_id => dispatch => {
         payload: data.cast
       })
     );
+};
+
+export const fetchDiscover = query => dispatch => {
+  fetch(`${api_base_url}/discover/${query}&api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      dispatch({ type: FETCH_DISCOVER, payload: data });
+    });
 };

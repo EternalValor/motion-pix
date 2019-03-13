@@ -7,5 +7,4 @@ const icon = props => (
   </svg>
 );
 
-
 export default icon;
