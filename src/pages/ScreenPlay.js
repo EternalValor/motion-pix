@@ -1,17 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchMovieDetails, fetchMovieCast } from '../actions/apiActions';
+import {
+  fetchMovieDetails,
+  fetchMovieCast,
+  resetScreenPlay
+} from '../actions/apiActions';
 import ScreenPlayHero from '../components/ScreenPlayHero';
 import ScreenPlayInfo from '../components/ScreenPlayInfo';
+import Loader from '../components/Loader';
 
 class ScreenPlay extends React.Component {
   componentDidMount() {
     this.props.fetchMovieDetails(this.props.match.params.id);
     this.props.fetchMovieCast(this.props.match.params.id);
   }
+
+  componentWillUnmount() {
+    this.props.resetScreenPlay();
+  }
+
   render() {
-    console.log(this.props.movieDetails);
+    console.log('MOVIE DETAILS', this.props.movieDetails);
     return (
       <React.Fragment>
         {Object.keys(this.props.movieDetails).length ? (
@@ -23,7 +33,29 @@ class ScreenPlay extends React.Component {
             />
           </React.Fragment>
         ) : (
-          <div className="screenplay-hero" />
+          <React.Fragment>
+            <div
+              style={{
+                width: '50%',
+                height: '40rem',
+                position: 'relative',
+                margin: '0 auto'
+              }}>
+              <Loader />
+            </div>
+            <div
+              style={{
+                textAlign: 'center',
+                marginBottom: '10rem',
+                fontSize: '1.6rem'
+              }}>
+              Loading...
+              <div style={{ fontSize: '1rem', fontWeight: '300' }}>
+                If this takes too long, then the screenplay you're requesting is
+                unknown.
+              </div>
+            </div>
+          </React.Fragment>
         )}
       </React.Fragment>
     );
@@ -32,6 +64,7 @@ class ScreenPlay extends React.Component {
 
 ScreenPlay.propTypes = {
   fetchMovieDetails: PropTypes.func.isRequired,
+  resetScreenPlay: PropTypes.func.isRequired,
   movieDetails: PropTypes.object.isRequired,
   movieCast: PropTypes.array.isRequired
 };
@@ -43,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchMovieDetails, fetchMovieCast }
+  { fetchMovieDetails, fetchMovieCast, resetScreenPlay }
 )(ScreenPlay);

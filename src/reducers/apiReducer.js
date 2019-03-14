@@ -6,7 +6,8 @@ import {
   FETCH_FEATURED_LISTS,
   FETCH_MOVIE_DETAILS,
   FETCH_MOVIE_CAST,
-  FETCH_DISCOVER
+  FETCH_DISCOVER,
+  RESET_SCREENPLAY
 } from '../actions/types';
 
 const initialState = {
@@ -61,6 +62,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         discoverData: action.payload
+      };
+    case RESET_SCREENPLAY:
+      return {
+        ...state,
+        movieDetails: action.payload
       };
     default:
       return state;

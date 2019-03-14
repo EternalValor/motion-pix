@@ -6,7 +6,8 @@ import {
   FETCH_FEATURED_LISTS,
   FETCH_MOVIE_DETAILS,
   FETCH_MOVIE_CAST,
-  FETCH_DISCOVER
+  FETCH_DISCOVER,
+  RESET_SCREENPLAY
 } from './types';
 import { api_base_url, apiKey } from '../api_info';
 
@@ -88,7 +89,13 @@ export const fetchMovieDetails = movie_id => dispatch => {
     .then(data =>
       dispatch({
         type: FETCH_MOVIE_DETAILS,
-        payload: data
+        payload: data.id ? data : {}
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: FETCH_MOVIE_DETAILS,
+        payload: {}
       })
     );
 };
@@ -99,7 +106,13 @@ export const fetchMovieCast = movie_id => dispatch => {
     .then(data =>
       dispatch({
         type: FETCH_MOVIE_CAST,
-        payload: data.cast
+        payload: data.cast ? data.cast : []
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: FETCH_MOVIE_CAST,
+        payload: []
       })
     );
 };
@@ -110,4 +123,11 @@ export const fetchDiscover = query => dispatch => {
     .then(data => {
       dispatch({ type: FETCH_DISCOVER, payload: data });
     });
+};
+
+export const resetScreenPlay = () => {
+  return {
+    type: RESET_SCREENPLAY,
+    payload: {}
+  };
 };
