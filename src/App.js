@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import ScreenPlay from './pages/ScreenPlay';
 import Discover from './pages/Discover';
-import Construction from './components/Construction';
+// import Construction from './components/Construction';
 import ScrollToTop from './components/ScrollToTop';
 import { connect } from 'react-redux';
 import { fetchTvGenres, fetchMovieGenres } from './actions/apiActions';
@@ -25,15 +25,15 @@ class App extends Component {
         <ScrollToTop>
           <Layout>
             <Switch>
-              <Route path="/tv-show/:id" component={Construction} />
+              <Route
+                path="/tv-show/:id"
+                render={props => <ScreenPlay {...props} type="tv" />}
+              />
               <Route
                 path="/movie/:id"
                 render={props => <ScreenPlay {...props} type="movie" />}
               />
-              <Route
-                path="/discover"
-                component={Discover}
-              />
+              <Route path="/discover" component={Discover} />
               <Route path="/" exact component={Home} />
             </Switch>
           </Layout>

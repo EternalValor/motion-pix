@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  fetchMovieDetails,
+  fetchScreenPlayDetails,
   fetchMovieCast,
   resetScreenPlay
 } from '../actions/apiActions';
@@ -12,8 +12,11 @@ import Loader from '../components/Loader';
 
 class ScreenPlay extends React.Component {
   componentDidMount() {
-    this.props.fetchMovieDetails(this.props.match.params.id);
-    this.props.fetchMovieCast(this.props.match.params.id);
+    this.props.fetchScreenPlayDetails(
+      this.props.match.params.id,
+      this.props.type
+    );
+    this.props.fetchMovieCast(this.props.match.params.id, this.props.type);
   }
 
   componentWillUnmount() {
@@ -21,14 +24,13 @@ class ScreenPlay extends React.Component {
   }
 
   render() {
-    console.log('MOVIE DETAILS', this.props.movieDetails);
     return (
       <React.Fragment>
-        {Object.keys(this.props.movieDetails).length ? (
+        {Object.keys(this.props.screenplayDetails).length ? (
           <React.Fragment>
-            <ScreenPlayHero movieDetails={this.props.movieDetails} />
+            <ScreenPlayHero screenplayDetails={this.props.screenplayDetails} />
             <ScreenPlayInfo
-              movieDetails={this.props.movieDetails}
+              screenplayDetails={this.props.screenplayDetails}
               movieCast={this.props.movieCast}
             />
           </React.Fragment>
@@ -63,18 +65,18 @@ class ScreenPlay extends React.Component {
 }
 
 ScreenPlay.propTypes = {
-  fetchMovieDetails: PropTypes.func.isRequired,
+  fetchScreenPlayDetails: PropTypes.func.isRequired,
   resetScreenPlay: PropTypes.func.isRequired,
-  movieDetails: PropTypes.object.isRequired,
+  screenplayDetails: PropTypes.object.isRequired,
   movieCast: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  movieDetails: state.apiData.movieDetails,
+  screenplayDetails: state.apiData.screenplayDetails,
   movieCast: state.apiData.movieCast
 });
 
 export default connect(
   mapStateToProps,
-  { fetchMovieDetails, fetchMovieCast, resetScreenPlay }
+  { fetchScreenPlayDetails, fetchMovieCast, resetScreenPlay }
 )(ScreenPlay);

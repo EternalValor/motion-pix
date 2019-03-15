@@ -307,6 +307,23 @@
         @include respond(phone) {
           font-size: 1.2rem;
         }
+
+        &--genres {
+          width: 14rem;
+        }
+      }
+    }
+
+    &__genre {
+      display: inline-block;
+      font-size: 1.2rem;
+      line-height: 1;
+      padding: 0.5rem 0.7rem;
+      border: 1px solid var(--grey-2);
+      margin-bottom: 1rem;
+
+      &:nth-child(odd) {
+        margin-right: 1.5rem;
       }
     }
   }

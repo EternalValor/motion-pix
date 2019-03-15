@@ -83,13 +83,22 @@ export const fetchFeaturedLists = movie_id => dispatch => {
     });
 };
 
-export const fetchMovieDetails = movie_id => dispatch => {
-  fetch(`${api_base_url}/movie/${movie_id}?api_key=${apiKey}`)
+export const fetchScreenPlayDetails = (movie_id, type) => dispatch => {
+  fetch(`${api_base_url}/${type}/${movie_id}?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data =>
       dispatch({
         type: FETCH_MOVIE_DETAILS,
-        payload: data.id ? data : {}
+        payload: data.id
+          ? type === 'tv'
+            ? {
+                ...data,
+                title: data.name,
+                release_date: parseInt(data.first_air_date),
+                runtime: data.episode_run_time[0]
+              }
+            : data
+          : {}
       })
     )
     .catch(err =>
@@ -100,13 +109,20 @@ export const fetchMovieDetails = movie_id => dispatch => {
     );
 };
 
-export const fetchMovieCast = movie_id => dispatch => {
-  fetch(`${api_base_url}/movie/${movie_id}/credits?api_key=${apiKey}`)
+export const fetchMovieCast = (movie_id, type) => dispatch => {
+  fetch(`${api_base_url}/${type}/${movie_id}/credits?api_key=${apiKey}`)
     .then(res => res.json())
     .then(data =>
       dispatch({
         type: FETCH_MOVIE_CAST,
-        payload: data.cast ? data.cast : []
+        payload: data.cast
+          ? type === 'tv'
+            ? data.cast.map(castMember => ({
+                ...castMember,
+                cast_id: castMember.id
+              }))
+            : data.cast
+          : []
       })
     )
     .catch(err =>

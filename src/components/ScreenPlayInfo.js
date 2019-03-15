@@ -64,7 +64,7 @@ const screenPlayInfo = props => {
         <div className="screenplay-info__overview">
           <h3 className="screenplay-info__overview__heading">Overview</h3>
           <div className="screenplay-info__overview__text">
-            {props.movieDetails.overview}
+            {props.screenplayDetails.overview}
           </div>
           <div className="screenplay-info__overview__trailer">
             <div className="play-button play-button--black" /> &nbsp;&nbsp;Play
@@ -117,7 +117,7 @@ const screenPlayInfo = props => {
               Status
             </h4>
             <div className="screenplay-info__fun-facts__fact__info">
-              {props.movieDetails.status}
+              {props.screenplayDetails.status}
             </div>
           </div>
           <div className="screenplay-info__fun-facts__fact">
@@ -125,7 +125,7 @@ const screenPlayInfo = props => {
               Original Language
             </h4>
             <div className="screenplay-info__fun-facts__fact__info">
-              {props.movieDetails.original_language.toUpperCase()}
+              {props.screenplayDetails.original_language.toUpperCase()}
             </div>
           </div>
           <div className="screenplay-info__fun-facts__fact">
@@ -133,37 +133,51 @@ const screenPlayInfo = props => {
               Runtime
             </h4>
             <div className="screenplay-info__fun-facts__fact__info">
-              {`${props.movieDetails.runtime} minutes`}
+              {`${props.screenplayDetails.runtime} minutes`}
             </div>
           </div>
           <div className="screenplay-info__fun-facts__fact">
             <h4 className="screenplay-info__fun-facts__fact__heading">
-              Budget
+              {props.screenplayDetails.number_of_seasons
+                ? '# Seasons'
+                : 'Budget'}
             </h4>
             <div className="screenplay-info__fun-facts__fact__info">
-              {new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-              }).format(props.movieDetails.budget)}
+              {props.screenplayDetails.number_of_seasons
+                ? props.screenplayDetails.number_of_seasons
+                : new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                  }).format(props.screenplayDetails.budget)}
             </div>
           </div>
           <div className="screenplay-info__fun-facts__fact">
             <h4 className="screenplay-info__fun-facts__fact__heading">
-              Revenue
+              {props.screenplayDetails.number_of_episodes
+                ? '# Episodes'
+                : 'Revenue'}
             </h4>
             <div className="screenplay-info__fun-facts__fact__info">
-              {new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-              }).format(props.movieDetails.revenue)}
+              {props.screenplayDetails.number_of_episodes
+                ? props.screenplayDetails.number_of_episodes
+                : new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD'
+                  }).format(props.screenplayDetails.revenue)}
             </div>
           </div>
           <div className="screenplay-info__fun-facts__fact">
             <h4 className="screenplay-info__fun-facts__fact__heading">
               Genres
             </h4>
-            <div className="screenplay-info__fun-facts__fact__info">
-              Released
+            <div className="screenplay-info__fun-facts__fact__info screenplay-info__fun-facts__fact__info--genres">
+              {props.screenplayDetails.genres.map(genre => (
+                <div
+                  key={genre.id}
+                  className="screenplay-info__fun-facts__genre">
+                  {genre.name}
+                </div>
+              ))}
             </div>
           </div>
         </div>

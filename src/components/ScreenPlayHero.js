@@ -8,7 +8,7 @@ const screenPlayHero = props => (
   <div
     style={{
       backgroundImage: `url(${image_base_url}/w${props.backdropSize}${
-        props.movieDetails.backdrop_path
+        props.screenplayDetails.backdrop_path
       })`
     }}
     className="screenplay-hero">
@@ -16,23 +16,23 @@ const screenPlayHero = props => (
       <div className="screenplay-hero__content--top">
         <div className="screenplay-hero__poster-container">
           <img
-            src={`${image_base_url}/w185${props.movieDetails.poster_path}`}
+            src={`${image_base_url}/w185${props.screenplayDetails.poster_path}`}
             alt="movieposter"
             className="screenplay-hero__poster"
           />
         </div>
         <div className="screenplay-hero__text">
           <h1 className="screenplay-hero__heading">
-            {`${props.movieDetails.title} (${parseInt(
-              props.movieDetails.release_date
+            {`${props.screenplayDetails.title} (${parseInt(
+              props.screenplayDetails.release_date
             )})`}
           </h1>
           <div className="screenplay-hero__overview">
             <h3 className="screenplay-hero__overview__heading">Overview</h3>
             <div className="screenplay-hero__overview__text">
-              {props.movieDetails.overview
-                ? `${props.movieDetails.overview.split('.')[0]}. ${
-                    props.movieDetails.overview.split('.')[1]
+              {props.screenplayDetails.overview
+                ? `${props.screenplayDetails.overview.split('.')[0]}. ${
+                    props.screenplayDetails.overview.split('.')[1]
                   }.`
                 : ' '}
             </div>

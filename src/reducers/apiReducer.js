@@ -16,7 +16,7 @@ const initialState = {
   genresTV: {},
   genresMovies: {},
   featuredLists: [],
-  movieDetails: {},
+  screenplayDetails: {},
   movieCast: [],
   discoverData: {}
 };
@@ -51,7 +51,7 @@ export default function(state = initialState, action) {
     case FETCH_MOVIE_DETAILS:
       return {
         ...state,
-        movieDetails: action.payload
+        screenplayDetails: action.payload
       };
     case FETCH_MOVIE_CAST:
       return {
@@ -66,7 +66,7 @@ export default function(state = initialState, action) {
     case RESET_SCREENPLAY:
       return {
         ...state,
-        movieDetails: action.payload
+        screenplayDetails: action.payload
       };
     default:
       return state;
