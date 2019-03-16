@@ -7,10 +7,12 @@ import {
   FETCH_MOVIE_DETAILS,
   FETCH_MOVIE_CAST,
   FETCH_DISCOVER,
-  RESET_SCREENPLAY
+  RESET_SCREENPLAY,
+  FETCH_TRENDING
 } from '../actions/types';
 
 const initialState = {
+  trendingInfo: {},
   popularTV: [],
   popularMovies: [],
   genresTV: {},
@@ -23,6 +25,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case FETCH_TRENDING:
+      return {
+        ...state,
+        trendingInfo: action.payload
+      };
     case FETCH_POPULAR_TV:
       return {
         ...state,

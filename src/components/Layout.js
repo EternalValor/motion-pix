@@ -61,8 +61,22 @@ class Layout extends React.Component {
                       Discover
                     </NavLink>
                   </li>
-                  <li>Movies</li>
-                  <li>TV Shows</li>
+                  <li>
+                    <NavLink
+                      className="link"
+                      to="/popular/movies"
+                      activeClassName="active-nav-link">
+                      Movies
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className="link"
+                      to="/popular/tv-shows"
+                      activeClassName="active-nav-link">
+                      TV Shows
+                    </NavLink>
+                  </li>
                 </ul>
               </React.Fragment>
             ) : null}
@@ -73,8 +87,16 @@ class Layout extends React.Component {
                   Discover
                 </Link>
               </li>
-              <li>Movies</li>
-              <li>TV Shows</li>
+              <li>
+                <Link className="link" to="/popular/movies">
+                  Movies
+                </Link>
+              </li>
+              <li>
+                <Link className="link" to="/popular/tv-shows">
+                  TV Shows
+                </Link>
+              </li>
               <li>Sign In</li>
             </ul>
           </div>

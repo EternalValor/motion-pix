@@ -5,17 +5,28 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import ScreenPlay from './pages/ScreenPlay';
 import Discover from './pages/Discover';
+import Populars from './pages/Populars';
 // import Construction from './components/Construction';
 import ScrollToTop from './components/ScrollToTop';
 import { connect } from 'react-redux';
-import { fetchTvGenres, fetchMovieGenres } from './actions/apiActions';
+import {
+  fetchTvGenres,
+  fetchMovieGenres,
+  fetchTrending,
+  fetchPopularTV,
+  fetchPopularMovies
+} from './actions/apiActions';
 import { setBackdropSize } from './actions/displayActions';
 
 class App extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetchTvGenres();
     this.props.fetchMovieGenres();
-    this.props.setBackdropSize(window.innerWidth);
+    this.props.fetchPopularTV();
+    this.props.fetchPopularMovies();
+    await this.props.setBackdropSize(window.innerWidth);
+    this.props.fetchTrending(this.props.backdropSize);
+    console.log(this.props.backdropSize);
     console.log('[APP HAS LOADED]');
   }
 
@@ -33,6 +44,7 @@ class App extends Component {
                 path="/movie/:id"
                 render={props => <ScreenPlay {...props} type="movie" />}
               />
+              <Route path="/popular/:id" component={Populars} />
               <Route path="/discover" component={Discover} />
               <Route path="/" exact component={Home} />
             </Switch>
@@ -46,10 +58,22 @@ class App extends Component {
 App.propTypes = {
   fetchTvGenres: PropTypes.func.isRequired,
   fetchMovieGenres: PropTypes.func.isRequired,
-  setBackdropSize: PropTypes.func.isRequired
+  setBackdropSize: PropTypes.func.isRequired,
+  backdropSize: PropTypes.number.isRequired
 };
 
+const mapStateToProps = state => ({
+  backdropSize: state.displaySettings.backdropSize
+});
+
 export default connect(
-  state => ({}),
-  { fetchTvGenres, fetchMovieGenres, setBackdropSize }
+  mapStateToProps,
+  {
+    fetchTvGenres,
+    fetchMovieGenres,
+    setBackdropSize,
+    fetchTrending,
+    fetchPopularTV,
+    fetchPopularMovies
+  }
 )(App);

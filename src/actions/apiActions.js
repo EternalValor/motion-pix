@@ -1,4 +1,5 @@
 import {
+  FETCH_TRENDING,
   FETCH_POPULAR_TV,
   FETCH_POPULAR_MOVIES,
   FETCH_TV_GENRES,
@@ -9,7 +10,24 @@ import {
   FETCH_DISCOVER,
   RESET_SCREENPLAY
 } from './types';
-import { api_base_url, apiKey } from '../api_info';
+import { api_base_url, apiKey, image_base_url } from '../api_info';
+
+export const fetchTrending = backdropSize => dispatch => {
+  fetch(`${api_base_url}/trending/movie/week?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      const src = [];
+      let trending = data.results.slice(0, 5);
+      trending.forEach(movie => {
+        src.push(`${image_base_url}/w${backdropSize}/${movie.backdrop_path}`);
+      });
+      let trendingInfo = { trending, src };
+      dispatch({
+        type: FETCH_TRENDING,
+        payload: trendingInfo
+      });
+    });
+};
 
 export const fetchPopularTV = () => dispatch => {
   fetch(`${api_base_url}/tv/popular?api_key=${apiKey}`)

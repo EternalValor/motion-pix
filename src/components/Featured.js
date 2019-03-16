@@ -7,11 +7,6 @@ import { connect } from 'react-redux';
 import { fetchPopularTV, fetchPopularMovies } from '../actions/apiActions';
 
 class Featured extends React.Component {
-  componentDidMount() {
-    this.props.fetchPopularTV();
-    this.props.fetchPopularMovies();
-  }
-
   render() {
     // Used to load a default placeholder while content in loading
     let defaultPic = (

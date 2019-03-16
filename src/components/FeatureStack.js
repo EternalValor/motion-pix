@@ -25,7 +25,6 @@ class FeatureStack extends React.Component {
 
   handleHover = e => {
     this.setState({ currentHover: parseInt(e.target.dataset.position) });
-    console.log(typeof e.target.dataset.position);
   };
 
   handleLeave = () => {
