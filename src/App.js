@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import ScreenPlay from './pages/ScreenPlay';
 import Discover from './pages/Discover';
 import Populars from './pages/Populars';
-// import Construction from './components/Construction';
+import Construction from './components/Construction';
 import ScrollToTop from './components/ScrollToTop';
 import { connect } from 'react-redux';
 import {
@@ -36,6 +36,7 @@ class App extends Component {
         <ScrollToTop>
           <Layout>
             <Switch>
+              <Route path="/search" component={Construction} />
               <Route
                 path="/tv-show/:id"
                 render={props => <ScreenPlay {...props} type="tv" />}
@@ -44,7 +45,7 @@ class App extends Component {
                 path="/movie/:id"
                 render={props => <ScreenPlay {...props} type="movie" />}
               />
-              <Route path="/popular/:id" component={Populars} />
+              <Route path="/popular/:type" component={Populars} />
               <Route path="/discover" component={Discover} />
               <Route path="/" exact component={Home} />
             </Switch>

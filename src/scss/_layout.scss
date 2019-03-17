@@ -245,6 +245,15 @@
       }
     }
   }
+
+  &__watermark {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .github-circle {

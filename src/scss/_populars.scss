@@ -1,8 +1,144 @@
 .populars {
   padding: 5rem 8rem;
 
+  @include respond(mid-tab-land) {
+    padding: 5rem 7rem;
+  }
+
+  @include respond(tab-port) {
+    padding: 5rem 2.5rem;
+  }
+
   &__heading {
     font-size: 2.4rem;
     font-weight: 400;
+    margin-bottom: 5rem;
+
+    @include respond(phone) {
+      margin-bottom: 3.5rem;
+    }
+  }
+
+  &__items-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__item {
+    flex-basis: 47.5rem;
+    height: 26.5rem;
+    margin-bottom: 8.5rem;
+    box-shadow: 0 0.4rem 0.4rem var(--box-shadow-color);
+
+    @include respond(mid-tab-land) {
+      flex-basis: 40rem;
+      height: 22.315rem;
+    }
+
+    @include respond(tab-port) {
+      flex-basis: 100%;
+      height: 50vw;
+      margin-bottom: 5.5rem;
+    }
+
+    &__banner {
+      position: relative;
+      width: 100%;
+      height: 83%;
+      background-color: var(--grey-3);
+      background-size: cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+
+      @include respond(tab-port) {
+        height: 80%;
+      }
+
+      &:hover &__overview {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      &__overview {
+        visibility: hidden;
+        opacity: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        font-size: 1.4rem;
+        padding: 10% 20%;
+        transition: 0.2s ease-in;
+      }
+    }
+
+    &__info {
+      height: 17%;
+      display: flex;
+      align-items: center;
+
+      @include respond(tab-port) {
+        height: 20%;
+      }
+    }
+
+    &__rating {
+      flex-basis: 10.5%;
+    }
+
+    &__rating-circle {
+      position: relative;
+      width: 60%;
+      height: 0;
+      padding-bottom: 60%;
+      border-radius: 50%;
+      border: 1.5px solid green;
+      margin: 0 auto;
+
+      &__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        @include respond(tab-port) {
+          font-size: 1.8rem;
+        }
+
+        @include respond(phone) {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &__heading {
+      height: 1.8rem;
+      font-size: 1.5rem;
+      line-height: 1.2;
+      font-weight: 400;
+      overflow: hidden;
+
+      @include respond(tab-port) {
+        font-size: 2rem;
+        height: 2.5rem;
+      }
+
+      @include respond(phone) {
+        height: 1.4rem;
+        font-size: 1.3rem;
+        line-height: 1;
+      }
+    }
+
+    &__date {
+      color: var(--grey-2);
+      @include respond(tab-port) {
+        font-size: 1.2rem;
+      }
+      @include respond(phone) {
+        font-size: 0.9rem;
+      }
+    }
   }
 }
