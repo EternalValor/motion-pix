@@ -143,10 +143,10 @@ class Layout extends React.Component {
                   <li className="u-semi-bold u-fs-18">The Basics</li>
                   <li>About Us</li>
                   <li>Contact Us</li>
-                  <li>
+                  <a href="https://github.com/EternalValor/motion-pix" className="link">
                     Github
                     <Icon className="github-circle" name="github-circle" />
-                  </li>
+                  </a>
                 </ul>
                 <ul className="footer__list">
                   <li className="u-semi-bold u-fs-18">Community</li>
