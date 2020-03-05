@@ -117,7 +117,9 @@ class FeatureStack extends React.Component {
       </div>
     );
 
-    return <React.Fragment>{featureStack}</React.Fragment>;
+    return (
+      <React.Fragment data-test="feature-stack">{featureStack}</React.Fragment>
+    );
   }
 }
 
@@ -134,9 +136,7 @@ const FeatureStackItem = props =>
     <Link to={`/movie/${props.data.id}`}>
       <div
         style={{
-          background: `url(https://image.tmdb.org/t/p/w200/${
-            props.data.poster_path
-          })`,
+          background: `url(https://image.tmdb.org/t/p/w200/${props.data.poster_path})`,
           backgroundSize: 'cover'
         }}
         onMouseOver={props.handleHover}
