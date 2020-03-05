@@ -53,9 +53,13 @@ const featureItem = props => {
   }
 
   return props.data.first_air_date ? (
-    <Link to={`/tv-show/${props.data.id}`}>{returnedElement}</Link>
+    <Link to={`/tv-show/${props.data.id}`} data-test="feature-item">
+      {returnedElement}
+    </Link>
   ) : (
-    <Link to={`/movie/${props.data.id}`}>{returnedElement}</Link>
+    <Link to={`/movie/${props.data.id}`} data-test="feature-item">
+      {returnedElement}
+    </Link>
   );
 };
 

@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 
 const discoverItem = props => {
   return (
-    <div className="discover-item">
-      <div
-        style={{
-          backgroundImage: `url(${image_base_url}/w185${
-            props.discoverItemData.poster_path
-          })`
-        }}
-        className="discover-item__poster"
-      />
+    <div className="discover-item" data-test="discover-item">
+      <Link to={`/${props.type}/${props.discoverItemData.id}`} className="link">
+        <div
+          style={{
+            backgroundImage: `url(${image_base_url}/w185${props.discoverItemData.poster_path})`
+          }}
+          className="discover-item__poster"
+        />
+      </Link>
       <div className="discover-item__info">
         <h2 className="discover-item__heading">
           {props.discoverItemData.title

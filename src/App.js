@@ -18,7 +18,7 @@ import {
 } from './actions/apiActions';
 import { setBackdropSize } from './actions/displayActions';
 
-class App extends Component {
+export class App extends Component {
   async componentDidMount() {
     this.props.fetchTvGenres();
     this.props.fetchMovieGenres();
@@ -32,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router data-test="app">
         <ScrollToTop>
           <Layout>
             <Switch>
